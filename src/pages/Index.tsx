@@ -50,7 +50,7 @@ const Index = () => {
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center hero-content">
           {/* Tag */}
           <div
-            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm hero-tag"
+            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-6 lg:mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm hero-tag"
           >
             <span className="w-2 h-2 rounded-full bg-gold" />
             שירות נדל״ן פרימיום
