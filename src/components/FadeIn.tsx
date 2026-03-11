@@ -1,5 +1,4 @@
-import { ReactNode } from "react";
-import { motion, type Variants } from "framer-motion";
+import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface FadeInProps {
   children: ReactNode;
@@ -11,55 +10,64 @@ interface FadeInProps {
   once?: boolean;
 }
 
-const directionOffset = {
-  up: { y: 30, x: 0 },
-  down: { y: -30, x: 0 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
-  none: { x: 0, y: 0 },
-};
-
 const FadeIn = ({
   children,
   delay = 0,
   className = "",
   direction = "up",
-  duration = 0.8,
+  duration = 0.6,
   scale = false,
   once = true,
 }: FadeInProps) => {
-  const offset = directionOffset[direction];
+  const ref = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  const variants: Variants = {
-    hidden: {
-      opacity: 0,
-      x: offset.x,
-      y: offset.y,
-      ...(scale ? { scale: 0.93 } : {}),
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration,
-        delay: delay / 1000,
-        ease: [0.16, 1, 0.3, 1],
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (once) observer.unobserve(el);
+        } else if (!once) {
+          setIsVisible(false);
+        }
       },
-    },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [once]);
+
+  const directionStyles: Record<string, string> = {
+    up: "translate3d(0, 24px, 0)",
+    down: "translate3d(0, -24px, 0)",
+    left: "translate3d(30px, 0, 0)",
+    right: "translate3d(-30px, 0, 0)",
+    none: "translate3d(0, 0, 0)",
   };
 
+  const hiddenTransform = directionStyles[direction];
+  const scaleVal = scale ? "scale(0.95)" : "";
+
   return (
-    <motion.div
+    <div
+      ref={ref}
       className={className}
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once, amount: 0.12 }}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? "translate3d(0, 0, 0) scale(1)"
+          : `${hiddenTransform} ${scaleVal}`,
+        transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay / 1000}s, transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay / 1000}s`,
+        willChange: isVisible ? "auto" : "opacity, transform",
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 

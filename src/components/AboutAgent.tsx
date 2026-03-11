@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import liyaPhoto from "@/assets/liya-photo.jpeg";
 import FadeIn from "@/components/FadeIn";
 import CountUp from "@/components/CountUp";
@@ -21,28 +20,20 @@ const AboutAgent = () => {
           {/* Right side — Photo */}
           <FadeIn direction="right" className="flex justify-center lg:justify-end order-1">
             <div className="relative">
-              <motion.div
-                className="absolute -inset-4 md:-inset-5 border border-gold/15 rounded-3xl"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              />
+              <div className="absolute -inset-4 md:-inset-5 border border-gold/15 rounded-3xl" />
               <div className="absolute -top-4 -right-4 md:-top-5 md:-right-5 w-10 h-10 border-t-2 border-r-2 border-gold/30 rounded-tr-2xl" />
               <div className="absolute -bottom-4 -left-4 md:-bottom-5 md:-left-5 w-10 h-10 border-b-2 border-l-2 border-gold/30 rounded-bl-2xl" />
 
-              <motion.div
-                className="relative overflow-hidden rounded-2xl shadow-2xl"
-                whileHover={{ y: -5 }}
-                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              >
+              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                 <img
                   src={liyaPhoto}
                   alt="ליה – סוכנת נדל״ן"
                   className="w-[280px] md:w-[360px] lg:w-[400px] h-[380px] md:h-[480px] lg:h-[540px] object-cover object-top"
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/20 to-transparent" />
-              </motion.div>
+              </div>
             </div>
           </FadeIn>
 
@@ -71,19 +62,8 @@ const AboutAgent = () => {
 
               {/* Stats */}
               <div className="grid grid-cols-3 gap-8">
-                {stats.map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    className="text-center lg:text-right"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      delay: 0.4 + i * 0.12,
-                      duration: 0.6,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
+                {stats.map((stat) => (
+                  <div key={stat.label} className="text-center lg:text-right">
                     <CountUp
                       end={stat.value}
                       suffix={stat.suffix}
@@ -92,7 +72,7 @@ const AboutAgent = () => {
                     <p className="text-muted-foreground text-xs mt-2 tracking-wide">
                       {stat.label}
                     </p>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>

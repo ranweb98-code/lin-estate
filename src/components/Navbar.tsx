@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone, Menu, X, Instagram } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -20,7 +19,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -28,15 +27,13 @@ const Navbar = () => {
   const isTransparent = isHome && !scrolled && !isOpen;
 
   return (
-    <motion.nav
+    <nav
       className={`fixed top-0 right-0 left-0 z-50 transition-all duration-500 ${
         isTransparent
           ? "bg-transparent"
           : "bg-background/90 backdrop-blur-2xl border-b border-border shadow-sm"
       }`}
-      initial={{ y: -80 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      style={{ transform: "translateZ(0)" }}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -69,11 +66,7 @@ const Navbar = () => {
               >
                 {link.label}
                 {location.pathname === link.to && (
-                  <motion.div
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-gold"
-                    layoutId="nav-indicator"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-gold" />
                 )}
               </Link>
             ))}
@@ -115,55 +108,41 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="md:hidden bg-background/98 backdrop-blur-2xl border-t border-border"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="container mx-auto px-4 py-6 flex flex-col gap-1">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.to}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05, duration: 0.3 }}
-                >
-                  <Link
-                    to={link.to}
-                    onClick={() => setIsOpen(false)}
-                    className={`block text-base font-medium py-3.5 px-5 rounded-xl transition-all duration-300 ${
-                      location.pathname === link.to
-                        ? "text-gold bg-gold-light"
-                        : "text-foreground hover:bg-secondary"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-              <div className="flex items-center gap-5 pt-5 mt-3 border-t border-border">
-                <a href="tel:+972546739422" className="flex items-center gap-2 text-sm font-medium text-gold">
-                  <Phone className="h-4 w-4" />
-                  <span dir="ltr">054-673-9422</span>
-                </a>
-                <a
-                  href="https://www.instagram.com/liya_chernobrod?igsh=MXBodHlzczl5ZjNodw=="
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-gold transition-colors"
-                >
-                  <Instagram className="h-5 w-5" />
-                </a>
-              </div>
+      {isOpen && (
+        <div className="md:hidden bg-background/98 backdrop-blur-2xl border-t border-border animate-fade-in">
+          <div className="container mx-auto px-4 py-6 flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+                className={`block text-base font-medium py-3.5 px-5 rounded-xl transition-all duration-300 ${
+                  location.pathname === link.to
+                    ? "text-gold bg-gold-light"
+                    : "text-foreground hover:bg-secondary"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="flex items-center gap-5 pt-5 mt-3 border-t border-border">
+              <a href="tel:+972546739422" className="flex items-center gap-2 text-sm font-medium text-gold">
+                <Phone className="h-4 w-4" />
+                <span dir="ltr">054-673-9422</span>
+              </a>
+              <a
+                href="https://www.instagram.com/liya_chernobrod?igsh=MXBodHlzczl5ZjNodw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-gold transition-colors"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 
