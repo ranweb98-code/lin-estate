@@ -100,6 +100,11 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .h-dvh {
+    height: 100vh;
+    height: 100dvh;
+  }
+
   .will-change-transform {
     will-change: transform;
   }

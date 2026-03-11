@@ -32,7 +32,7 @@ const Index = () => {
   return (
     <div className="overflow-x-hidden">
       {/* ─── HERO ─── */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen h-dvh flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroBg}
@@ -50,30 +50,30 @@ const Index = () => {
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center hero-content">
           {/* Tag */}
           <div
-            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm hero-tag"
+            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-6 lg:mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm hero-tag"
           >
             <span className="w-2 h-2 rounded-full bg-gold" />
             שירות נדל״ן פרימיום
           </div>
 
           {/* Main headline */}
-          <div className="overflow-hidden mb-3">
-            <h1 className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight hero-title-1">
+          <div className="overflow-hidden mb-2 lg:mb-3">
+            <h1 className="text-[2.5rem] md:text-[4rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight hero-title-1">
               מצאו את הבית
             </h1>
           </div>
-          <div className="overflow-hidden mb-10 md:mb-14">
-            <h1 className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight hero-title-2">
+          <div className="overflow-hidden mb-6 md:mb-8 lg:mb-14">
+            <h1 className="text-[2.5rem] md:text-[4rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight hero-title-2">
               <span className="text-gold">המושלם</span>{" "}
               <span className="text-white/80">שלכם</span>
             </h1>
           </div>
 
           {/* Decorative line */}
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-10 hero-line" />
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-5 lg:mb-10 hero-line" />
 
           {/* Subtitle */}
-          <p className="text-sm md:text-base text-white/60 mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle">
+          <p className="text-sm md:text-base text-white/60 mb-8 lg:mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle">
             ליה – סוכנת נדל״ן עם שירות אישי, מקצועיות
             וליווי מלא עד סגירת העסקה
           </p>
