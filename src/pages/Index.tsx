@@ -73,7 +73,7 @@ const Index = () => {
           <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-5 lg:mb-10 hero-line" />
 
           {/* Subtitle */}
-          <p className="text-sm md:text-base text-white/60 mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle">
+          <p className="text-sm md:text-base text-white/60 mb-8 lg:mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle">
             ליה – סוכנת נדל״ן עם שירות אישי, מקצועיות
             וליווי מלא עד סגירת העסקה
           </p>
