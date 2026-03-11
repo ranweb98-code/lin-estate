@@ -20,14 +20,14 @@ const About = () => {
                   <motion.div
                     className="absolute -inset-3 rounded-2xl border border-gold/15"
                     animate={{ rotate: [1, -0.5, 1] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                  />
+                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} />
+                  
                   <div className="relative rounded-2xl overflow-hidden shadow-xl border border-border">
                     <img
                       src={liyaAbout}
                       alt="ליה – סוכנת נדל״ן"
-                      className="w-full aspect-[3/4] object-cover"
-                    />
+                      className="w-full aspect-[3/4] object-cover" />
+                    
                     <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/40 to-transparent h-28" />
                     <span className="absolute bottom-4 right-5 text-xs font-medium text-white/80 tracking-wide">
                       סוכנת נדל״ן מוסמכת
@@ -60,19 +60,19 @@ const About = () => {
                 </div>
 
                 <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-10">
-                  {["ליווי אישי", "ניסיון של 10+ שנים", "מאות עסקאות"].map((item, i) => (
-                    <motion.div
-                      key={item}
-                      className="flex items-center gap-2 text-xs text-foreground bg-secondary px-4 py-2 rounded-full border border-border"
-                      initial={{ opacity: 0, scale: 0.85 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.3 + i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    >
+                  {["ליווי אישי", "ניסיון של 10+ שנים", "מאות עסקאות"].map((item, i) =>
+                  <motion.div
+                    key={item}
+                    className="flex items-center gap-2 text-xs text-foreground bg-secondary px-4 py-2 rounded-full border border-border"
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}>
+                    
                       <CheckCircle className="h-3 w-3 text-gold" />
                       {item}
                     </motion.div>
-                  ))}
+                  )}
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
@@ -100,34 +100,34 @@ const About = () => {
       </section>
 
       {/* ─── STATS ─── */}
-      <section className="py-14 bg-foreground text-white relative grain">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
-            {[
-              { value: 150, suffix: "+", label: "נכסים שנמכרו" },
-              { value: 200, suffix: "+", label: "לקוחות מרוצים" },
-              { value: 10, suffix: "+", label: "שנות ניסיון" },
-              { value: 98, suffix: "%", label: "שביעות רצון" },
-            ].map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                className="text-center"
-                initial={{ opacity: 0, y: 15 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <CountUp
-                  end={stat.value}
-                  suffix={stat.suffix}
-                  className="text-2xl md:text-3xl font-bold font-display text-gold tabular-nums"
-                />
-                <p className="text-white/50 text-xs mt-2">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
       {/* ─── VALUES ─── */}
       <section className="py-24 bg-background">
@@ -141,16 +141,16 @@ const About = () => {
           </FadeIn>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {[
-              { icon: Heart, title: "שירות אישי", desc: "ליווי צמוד ואישי לכל לקוח מהרגע הראשון" },
-              { icon: Award, title: "מקצועיות", desc: "ידע מעמיק בשוק הנדל״ן המקומי" },
-              { icon: Building, title: "היכרות מקומית", desc: "מכירה כל שכונה ופרויקט באזור אשדוד" },
-              { icon: Users, title: "לקוחות מרוצים", desc: "מאות עסקאות מוצלחות לאורך השנים" },
-            ].map((v, i) => (
-              <FadeIn key={v.title} delay={i * 80} scale>
+            { icon: Heart, title: "שירות אישי", desc: "ליווי צמוד ואישי לכל לקוח מהרגע הראשון" },
+            { icon: Award, title: "מקצועיות", desc: "ידע מעמיק בשוק הנדל״ן המקומי" },
+            { icon: Building, title: "היכרות מקומית", desc: "מכירה כל שכונה ופרויקט באזור אשדוד" },
+            { icon: Users, title: "לקוחות מרוצים", desc: "מאות עסקאות מוצלחות לאורך השנים" }].
+            map((v, i) =>
+            <FadeIn key={v.title} delay={i * 80} scale>
                 <motion.div
-                  className="group bg-card border border-border rounded-2xl p-7 text-center hover:shadow-lg hover:border-gold/20 transition-all duration-300"
-                  whileHover={{ y: -4 }}
-                >
+                className="group bg-card border border-border rounded-2xl p-7 text-center hover:shadow-lg hover:border-gold/20 transition-all duration-300"
+                whileHover={{ y: -4 }}>
+                
                   <div className="w-12 h-12 rounded-xl bg-gold-light flex items-center justify-center mx-auto mb-5 group-hover:bg-gold/15 transition-colors">
                     <v.icon className="h-5 w-5 text-gold" />
                   </div>
@@ -158,12 +158,12 @@ const About = () => {
                   <p className="text-xs text-muted-foreground leading-relaxed">{v.desc}</p>
                 </motion.div>
               </FadeIn>
-            ))}
+            )}
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>);
+
 };
 
 export default About;
