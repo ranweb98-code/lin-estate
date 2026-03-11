@@ -57,13 +57,13 @@ const Index = () => {
           </div>
 
           {/* Main headline */}
-          <div className="overflow-hidden mb-3">
-            <h1 className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight hero-title-1">
+          <div className="overflow-hidden mb-2 lg:mb-3">
+            <h1 className="text-[2.5rem] md:text-[4rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight hero-title-1">
               מצאו את הבית
             </h1>
           </div>
-          <div className="overflow-hidden mb-10 md:mb-14">
-            <h1 className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight hero-title-2">
+          <div className="overflow-hidden mb-6 md:mb-8 lg:mb-14">
+            <h1 className="text-[2.5rem] md:text-[4rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight hero-title-2">
               <span className="text-gold">המושלם</span>{" "}
               <span className="text-white/80">שלכם</span>
             </h1>
