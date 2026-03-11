@@ -1,7 +1,6 @@
-import { lazy, Suspense, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, ArrowLeft, ChevronDown } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import PropertyCard from "@/components/PropertyCard";
 import { useProperties } from "@/hooks/useProperties";
@@ -16,27 +15,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 const AboutAgent = lazy(() => import("@/components/AboutAgent"));
 const Testimonials = lazy(() => import("@/components/Testimonials"));
 
-const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
-
 const Index = () => {
   const { data: properties = [], isLoading } = useProperties();
   const [listingType, setListingType] = useState<ListingType | "הכל">("הכל");
-
-  const heroRef = useRef<HTMLElement>(null);
-  const ctaRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress: heroProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const { scrollYProgress: ctaProgress } = useScroll({
-    target: ctaRef,
-    offset: ["start end", "end start"],
-  });
-
-  const heroOpacity = useTransform(heroProgress, [0, 0.7], [1, 0]);
-  const heroScale = useTransform(heroProgress, [0, 1], [1, 1.12]);
-  const ctaBgY = useTransform(ctaProgress, [0, 1], ["-5%", "5%"]);
 
   const filtered = properties.filter((p) => {
     if (listingType === "הכל") return true;
@@ -51,11 +32,8 @@ const Index = () => {
   return (
     <div className="overflow-x-hidden">
       {/* ─── HERO ─── */}
-      <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
-        <motion.div
-          className="absolute inset-0 will-change-transform"
-          style={{ scale: heroScale }}
-        >
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0">
           <img
             src={heroBg}
             alt="נדלן יוקרתי"
@@ -63,76 +41,45 @@ const Index = () => {
             fetchPriority="high"
             decoding="async"
           />
-        </motion.div>
+        </div>
 
-        {/* Overlay — darker for contrast on bright image */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
 
         {/* Content */}
-        <motion.div
-          className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center"
-          style={{ opacity: heroOpacity }}
-        >
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center hero-content">
           {/* Tag */}
-          <motion.div
-            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7, ease }}
+          <div
+            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm hero-tag"
           >
             <span className="w-2 h-2 rounded-full bg-gold" />
             שירות נדל״ן פרימיום
-          </motion.div>
+          </div>
 
           {/* Main headline */}
           <div className="overflow-hidden mb-3">
-            <motion.h1
-              className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.35, duration: 0.9, ease }}
-            >
+            <h1 className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight hero-title-1">
               מצאו את הבית
-            </motion.h1>
+            </h1>
           </div>
           <div className="overflow-hidden mb-10 md:mb-14">
-            <motion.h1
-              className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.5, duration: 0.9, ease }}
-            >
+            <h1 className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight hero-title-2">
               <span className="text-gold">המושלם</span>{" "}
               <span className="text-white/80">שלכם</span>
-            </motion.h1>
+            </h1>
           </div>
 
           {/* Decorative line */}
-          <motion.div
-            className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-10"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.7, duration: 0.8, ease }}
-          />
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-10 hero-line" />
 
           {/* Subtitle */}
-          <motion.p
-            className="text-sm md:text-base text-white/60 mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.7 }}
-          >
+          <p className="text-sm md:text-base text-white/60 mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle">
             ליה – סוכנת נדל״ן עם שירות אישי, מקצועיות
             וליווי מלא עד סגירת העסקה
-          </motion.p>
+          </p>
 
           {/* CTAs */}
-          <motion.div
-            className="flex flex-col sm:flex-row items-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1, duration: 0.6, ease }}
-          >
+          <div className="flex flex-col sm:flex-row items-center gap-4 hero-ctas">
             <Link to="/properties">
               <Button size="lg" className="bg-gold hover:bg-gold-dark text-gold-foreground gap-2.5 text-sm px-10 h-13 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/30 active:scale-[0.97]">
                 צפו בנכסים שלנו
@@ -145,25 +92,17 @@ const Index = () => {
                 מציאת נכס חכמה
               </Button>
             </Link>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
-        >
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 hero-scroll">
           <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-medium">גלול</span>
           <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
+          <div className="animate-bounce-slow">
             <ChevronDown className="h-4 w-4 text-white/30" />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* ─── PROPERTY OF THE WEEK ─── */}
@@ -232,12 +171,9 @@ const Index = () => {
       </Suspense>
 
       {/* ─── CTA ─── */}
-      <section ref={ctaRef} className="py-28 md:py-36 relative overflow-hidden grain">
+      <section className="py-28 md:py-36 relative overflow-hidden grain">
         <div className="absolute inset-0 bg-foreground" />
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-gold/[0.08] will-change-transform"
-          style={{ y: ctaBgY }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-gold/[0.08]" />
         {/* Decorative circles */}
         <div className="absolute top-20 right-20 w-64 h-64 border border-white/5 rounded-full" />
         <div className="absolute bottom-10 left-10 w-96 h-96 border border-white/5 rounded-full" />
@@ -266,13 +202,9 @@ const Index = () => {
 
       {/* ─── FLOATING AI BUTTON ─── */}
       <Link to="/ai-finder" className="fixed bottom-6 left-6 z-50" title="מציאת נכס בעזרת AI">
-        <motion.div
-          className="bg-gold text-gold-foreground rounded-full p-4 shadow-xl shadow-gold/25 transition-transform duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95"
-          animate={{ scale: [1, 1.05, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        >
+        <div className="bg-gold text-gold-foreground rounded-full p-4 shadow-xl shadow-gold/25 transition-transform duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95 animate-pulse-gold">
           <Sparkles className="h-5 w-5" />
-        </motion.div>
+        </div>
       </Link>
     </div>
   );

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { MapPin, BedDouble, Maximize, Star, MessageCircle, ArrowLeft } from "lucide-react";
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Property, formatPrice } from "@/data/properties";
 import FadeIn from "@/components/FadeIn";
@@ -41,30 +40,22 @@ const PropertyOfTheWeek = ({ properties }: PropertyOfTheWeekProps) => {
 
         <div className="max-w-5xl mx-auto">
           <FadeIn delay={150} scale>
-            <motion.div
-              className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-500"
-            >
+            <div className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-xl transition-shadow duration-500">
               <div className="grid grid-cols-1 lg:grid-cols-2">
                 {/* Image */}
                 <div className="relative overflow-hidden group">
-                  <motion.img
+                  <img
                     src={property.image}
                     alt={property.name}
-                    className="w-full h-[300px] md:h-[380px] lg:h-full object-cover"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full h-[300px] md:h-[380px] lg:h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                  <motion.div
-                    className="absolute top-4 right-4 bg-gold text-gold-foreground px-4 py-1.5 rounded-full text-[11px] font-semibold flex items-center gap-2 tracking-wide"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                  >
+                  <div className="absolute top-4 right-4 bg-gold text-gold-foreground px-4 py-1.5 rounded-full text-[11px] font-semibold flex items-center gap-2 tracking-wide">
                     <Star className="h-3 w-3 fill-current" />
                     הזדמנות השבוע
-                  </motion.div>
+                  </div>
                 </div>
 
                 {/* Details */}
@@ -100,25 +91,21 @@ const PropertyOfTheWeek = ({ properties }: PropertyOfTheWeekProps) => {
 
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link to={`/properties/${property.id}`} className="flex-1">
-                      <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                        <Button size="lg" className="w-full bg-gold hover:bg-gold-dark text-gold-foreground gap-2 h-12 rounded-full text-sm hover:shadow-lg hover:shadow-gold/15 transition-all">
-                          לצפייה בנכס
-                          <ArrowLeft className="h-3.5 w-3.5" />
-                        </Button>
-                      </motion.div>
+                      <Button size="lg" className="w-full bg-gold hover:bg-gold-dark text-gold-foreground gap-2 h-12 rounded-full text-sm hover:shadow-lg hover:shadow-gold/15 transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97]">
+                        לצפייה בנכס
+                        <ArrowLeft className="h-3.5 w-3.5" />
+                      </Button>
                     </Link>
                     <a href={whatsAppLink} target="_blank" rel="noopener noreferrer" className="flex-1">
-                      <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                        <Button size="lg" variant="outline" className="w-full gap-2 h-12 rounded-full text-sm border-border hover:bg-secondary">
-                          <MessageCircle className="h-3.5 w-3.5" />
-                          וואטסאפ
-                        </Button>
-                      </motion.div>
+                      <Button size="lg" variant="outline" className="w-full gap-2 h-12 rounded-full text-sm border-border hover:bg-secondary">
+                        <MessageCircle className="h-3.5 w-3.5" />
+                        וואטסאפ
+                      </Button>
                     </a>
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </FadeIn>
         </div>
       </div>
