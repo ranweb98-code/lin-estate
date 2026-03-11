@@ -70,7 +70,7 @@ const Index = () => {
           </div>
 
           {/* Decorative line */}
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-10 hero-line" />
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-5 lg:mb-10 hero-line" />
 
           {/* Subtitle */}
           <p className="text-sm md:text-base text-white/60 mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle">
