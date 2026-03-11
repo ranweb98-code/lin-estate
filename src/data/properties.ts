@@ -49,9 +49,9 @@ export function isEmbedVideo(url: string): boolean {
   return isYouTubeUrl(url) || isInstagramUrl(url) || isDrivePreviewUrl(url);
 }
 
-export function getEmbedUrl(url: string): string {
+export function getEmbedUrl(url: string, muted = true): string {
   const ytId = getYouTubeId(url);
-  if (ytId) return `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=0&showinfo=0&rel=0`;
+  if (ytId) return `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=${muted ? 1 : 0}&loop=1&playlist=${ytId}&controls=0&showinfo=0&rel=0&enablejsapi=1`;
   const instaUrl = getInstagramEmbedUrl(url);
   if (instaUrl) return instaUrl;
   return url;
