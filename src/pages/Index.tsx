@@ -32,7 +32,7 @@ const Index = () => {
   return (
     <div className="overflow-x-hidden">
       {/* ─── HERO ─── */}
-      <section className="relative min-h-screen h-dvh flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[600px] h-dvh flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroBg}
@@ -47,33 +47,38 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
 
         {/* Content */}
-        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center hero-content">
+        <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center hero-content pt-20 pb-24">
           {/* Tag */}
           <div
-            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-6 lg:mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm hero-tag"
+            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-auto text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm hero-tag"
+            style={{ marginBottom: 'clamp(1rem, 3vh, 3rem)' }}
           >
             <span className="w-2 h-2 rounded-full bg-gold" />
             שירות נדל״ן פרימיום
           </div>
 
           {/* Main headline */}
-          <div className="overflow-hidden mb-2 lg:mb-3">
-            <h1 className="text-[2.5rem] md:text-[4rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight hero-title-1">
+          <div className="overflow-hidden" style={{ marginBottom: 'clamp(0.25rem, 0.5vh, 0.75rem)' }}>
+            <h1 className="font-display font-bold text-white leading-[0.9] tracking-tight hero-title-1"
+                style={{ fontSize: 'clamp(2.5rem, 7vw, 6.5rem)' }}>
               מצאו את הבית
             </h1>
           </div>
-          <div className="overflow-hidden mb-6 md:mb-8 lg:mb-14">
-            <h1 className="text-[2.5rem] md:text-[4rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight hero-title-2">
+          <div className="overflow-hidden" style={{ marginBottom: 'clamp(1rem, 3vh, 3.5rem)' }}>
+            <h1 className="font-display font-bold leading-[0.9] tracking-tight hero-title-2"
+                style={{ fontSize: 'clamp(2.5rem, 7vw, 6.5rem)' }}>
               <span className="text-gold">המושלם</span>{" "}
               <span className="text-white/80">שלכם</span>
             </h1>
           </div>
 
           {/* Decorative line */}
-          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-5 lg:mb-10 hero-line" />
+          <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent hero-line"
+               style={{ marginBottom: 'clamp(0.75rem, 2vh, 2.5rem)' }} />
 
           {/* Subtitle */}
-          <p className="text-sm md:text-base text-white/60 mb-8 lg:mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle">
+          <p className="text-sm md:text-base text-white/60 max-w-md mx-auto font-light leading-relaxed tracking-wide hero-subtitle"
+             style={{ marginBottom: 'clamp(1.5rem, 3vh, 3.5rem)' }}>
             ליה – סוכנת נדל״ן עם שירות אישי, מקצועיות
             וליווי מלא עד סגירת העסקה
           </p>
@@ -95,10 +100,10 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3 hero-scroll">
+        {/* Scroll indicator - hidden on short viewports */}
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-2 hero-scroll">
           <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-medium">גלול</span>
-          <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
+          <div className="w-px h-8 bg-gradient-to-b from-white/30 to-transparent" />
           <div className="animate-bounce-slow">
             <ChevronDown className="h-4 w-4 text-white/30" />
           </div>
