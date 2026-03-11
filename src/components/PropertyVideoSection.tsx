@@ -1,6 +1,6 @@
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Play, MapPin, ArrowLeft } from "lucide-react";
+import { Play, MapPin, ArrowLeft, Volume2, VolumeX } from "lucide-react";
 import { Property, formatPrice, isEmbedVideo, getEmbedUrl } from "@/data/properties";
 import FadeIn from "@/components/FadeIn";
 
@@ -10,6 +10,16 @@ interface Props {
 
 function VideoCard({ property }: { property: Property }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleMute = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
+      setIsMuted(videoRef.current.muted);
+    }
+  }, []);
 
   return (
     <Link to={`/properties/${property.id}`} className="group block">
@@ -35,9 +45,26 @@ function VideoCard({ property }: { property: Property }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/15 to-transparent" />
 
-        {/* Play indicator */}
-        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gold/90 flex items-center justify-center backdrop-blur-sm shadow-lg shadow-gold/20">
-          <Play className="h-4 w-4 text-gold-foreground fill-current" />
+        {/* Top controls */}
+        <div className="absolute top-4 right-4 flex items-center gap-2">
+          {/* Mute/Unmute button - only for non-embed videos */}
+          {property.videoUrl && !isEmbedVideo(property.videoUrl) && (
+            <button
+              onClick={toggleMute}
+              className="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center backdrop-blur-sm shadow-lg transition-all hover:bg-black/70 active:scale-95"
+              aria-label={isMuted ? "הפעל צליל" : "השתק"}
+            >
+              {isMuted ? (
+                <VolumeX className="h-4 w-4 text-white" />
+              ) : (
+                <Volume2 className="h-4 w-4 text-white" />
+              )}
+            </button>
+          )}
+          {/* Play indicator */}
+          <div className="w-10 h-10 rounded-full bg-gold/90 flex items-center justify-center backdrop-blur-sm shadow-lg shadow-gold/20">
+            <Play className="h-4 w-4 text-gold-foreground fill-current" />
+          </div>
         </div>
 
         {/* Info */}
