@@ -1,0 +1,281 @@
+import { lazy, Suspense, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { Sparkles, ArrowLeft, ChevronDown } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import PropertyCard from "@/components/PropertyCard";
+import { useProperties } from "@/hooks/useProperties";
+import { ListingType } from "@/data/properties";
+import heroBg from "@/assets/hero-bg.jpg";
+import FadeIn from "@/components/FadeIn";
+import ListingTypeFilter from "@/components/ListingTypeFilter";
+import PropertyOfTheWeek from "@/components/PropertyOfTheWeek";
+import PropertyVideoSection from "@/components/PropertyVideoSection";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const AboutAgent = lazy(() => import("@/components/AboutAgent"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+
+const ease: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
+const Index = () => {
+  const { data: properties = [], isLoading } = useProperties();
+  const [listingType, setListingType] = useState<ListingType | "הכל">("הכל");
+
+  const heroRef = useRef<HTMLElement>(null);
+  const ctaRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const { scrollYProgress: ctaProgress } = useScroll({
+    target: ctaRef,
+    offset: ["start end", "end start"],
+  });
+
+  const heroOpacity = useTransform(heroProgress, [0, 0.7], [1, 0]);
+  const heroScale = useTransform(heroProgress, [0, 1], [1, 1.12]);
+  const ctaBgY = useTransform(ctaProgress, [0, 1], ["-5%", "5%"]);
+
+  const filtered = properties.filter((p) => {
+    if (listingType === "הכל") return true;
+    return p.listingType === listingType;
+  });
+
+  const displayFeatured = useMemo(() => {
+    const shuffled = [...filtered].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 3);
+  }, [filtered]);
+
+  return (
+    <div className="overflow-x-hidden">
+      {/* ─── HERO ─── */}
+      <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={{ scale: heroScale }}
+        >
+          <img
+            src={heroBg}
+            alt="נדלן יוקרתי"
+            className="w-full h-full object-cover"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </motion.div>
+
+        {/* Overlay — darker for contrast on bright image */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
+
+        {/* Content */}
+        <motion.div
+          className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center"
+          style={{ opacity: heroOpacity }}
+        >
+          {/* Tag */}
+          <motion.div
+            className="inline-flex items-center gap-3 border border-white/25 text-white px-6 py-2.5 rounded-full mb-12 text-[11px] tracking-[0.3em] uppercase font-medium backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7, ease }}
+          >
+            <span className="w-2 h-2 rounded-full bg-gold" />
+            שירות נדל״ן פרימיום
+          </motion.div>
+
+          {/* Main headline */}
+          <div className="overflow-hidden mb-3">
+            <motion.h1
+              className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold text-white leading-[0.9] tracking-tight"
+              initial={{ y: "110%" }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.35, duration: 0.9, ease }}
+            >
+              מצאו את הבית
+            </motion.h1>
+          </div>
+          <div className="overflow-hidden mb-10 md:mb-14">
+            <motion.h1
+              className="text-[2.8rem] md:text-[5rem] lg:text-[6.5rem] font-display font-bold leading-[0.9] tracking-tight"
+              initial={{ y: "110%" }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.5, duration: 0.9, ease }}
+            >
+              <span className="text-gold">המושלם</span>{" "}
+              <span className="text-white/80">שלכם</span>
+            </motion.h1>
+          </div>
+
+          {/* Decorative line */}
+          <motion.div
+            className="w-16 h-px bg-gradient-to-r from-transparent via-gold to-transparent mb-10"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.7, duration: 0.8, ease }}
+          />
+
+          {/* Subtitle */}
+          <motion.p
+            className="text-sm md:text-base text-white/60 mb-14 max-w-md mx-auto font-light leading-relaxed tracking-wide"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.7 }}
+          >
+            ליה – סוכנת נדל״ן עם שירות אישי, מקצועיות
+            וליווי מלא עד סגירת העסקה
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="flex flex-col sm:flex-row items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6, ease }}
+          >
+            <Link to="/properties">
+              <Button size="lg" className="bg-gold hover:bg-gold-dark text-gold-foreground gap-2.5 text-sm px-10 h-13 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/30 active:scale-[0.97]">
+                צפו בנכסים שלנו
+                <ArrowLeft className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/ai-finder">
+              <Button size="lg" className="bg-white/10 border border-white/20 text-white hover:bg-white/20 gap-2.5 text-sm px-10 h-13 rounded-full backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97]">
+                <Sparkles className="h-4 w-4" />
+                מציאת נכס חכמה
+              </Button>
+            </Link>
+          </motion.div>
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.4, duration: 0.6 }}
+        >
+          <span className="text-[10px] tracking-[0.3em] uppercase text-white/30 font-medium">גלול</span>
+          <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
+          <motion.div
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown className="h-4 w-4 text-white/30" />
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* ─── PROPERTY OF THE WEEK ─── */}
+      {!isLoading && properties.length > 0 && (
+        <PropertyOfTheWeek properties={properties} />
+      )}
+
+      {/* ─── PROPERTY VIDEOS ─── */}
+      {!isLoading && properties.length > 0 && (
+        <PropertyVideoSection properties={properties} />
+      )}
+
+      {/* ─── FEATURED PROPERTIES ─── */}
+      <section className="py-24 md:py-32 bg-background relative">
+        <div className="container mx-auto px-4 relative z-10">
+          <FadeIn>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14">
+              <div>
+                <span className="text-gold text-[11px] font-semibold tracking-[0.3em] uppercase mb-4 block">נכסים נבחרים</span>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-display text-foreground leading-tight">
+                  נכסים מומלצים
+                </h2>
+                <div className="w-12 h-0.5 bg-gold/30 mt-5" />
+              </div>
+              <ListingTypeFilter value={listingType} onChange={setListingType} />
+            </div>
+          </FadeIn>
+
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+              {[1, 2, 3].map((i) => (
+                <Skeleton key={i} className="h-[440px] rounded-2xl" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+              {displayFeatured.map((p, i) => (
+                <FadeIn key={p.id} delay={i * 100} scale>
+                  <PropertyCard property={p} />
+                </FadeIn>
+              ))}
+            </div>
+          )}
+
+          <FadeIn delay={200}>
+            <div className="text-center mt-16">
+              <Link to="/properties">
+                <Button variant="outline" size="lg" className="gap-2.5 border-border text-foreground hover:bg-gold hover:text-gold-foreground hover:border-gold rounded-full px-12 h-13 text-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97]">
+                  לכל הנכסים
+                  <ArrowLeft className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ─── ABOUT AGENT ─── */}
+      <Suspense fallback={<div className="py-24" />}>
+        <AboutAgent />
+      </Suspense>
+
+      {/* ─── TESTIMONIALS ─── */}
+      <Suspense fallback={<div className="py-24" />}>
+        <Testimonials />
+      </Suspense>
+
+      {/* ─── CTA ─── */}
+      <section ref={ctaRef} className="py-28 md:py-36 relative overflow-hidden grain">
+        <div className="absolute inset-0 bg-foreground" />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-gold/[0.06] via-transparent to-gold/[0.08] will-change-transform"
+          style={{ y: ctaBgY }}
+        />
+        {/* Decorative circles */}
+        <div className="absolute top-20 right-20 w-64 h-64 border border-white/5 rounded-full" />
+        <div className="absolute bottom-10 left-10 w-96 h-96 border border-white/5 rounded-full" />
+
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <FadeIn scale>
+            <span className="text-gold text-[11px] font-semibold tracking-[0.3em] uppercase mb-8 block">טכנולוגיה חכמה</span>
+            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold font-display mb-6 text-white leading-tight max-w-2xl mx-auto">
+              תנו ל-AI למצוא לכם
+              <br />
+              <span className="text-gold">את הנכס המושלם</span>
+            </h2>
+            <div className="w-16 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent mx-auto mb-8" />
+            <p className="text-white/50 mb-12 max-w-md mx-auto text-base font-light leading-relaxed">
+              המערכת החכמה שלנו תמצא לכם את הנכס המושלם בהתאם להעדפות שלכם
+            </p>
+            <Link to="/ai-finder">
+              <Button size="lg" className="bg-gold hover:bg-gold-dark text-gold-foreground gap-2.5 text-sm px-12 h-13 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-gold/30 active:scale-[0.97]">
+                <Sparkles className="h-4 w-4" />
+                התחילו עכשיו
+              </Button>
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ─── FLOATING AI BUTTON ─── */}
+      <Link to="/ai-finder" className="fixed bottom-6 left-6 z-50" title="מציאת נכס בעזרת AI">
+        <motion.div
+          className="bg-gold text-gold-foreground rounded-full p-4 shadow-xl shadow-gold/25 transition-transform duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <Sparkles className="h-5 w-5" />
+        </motion.div>
+      </Link>
+    </div>
+  );
+};
+
+export default Index;
