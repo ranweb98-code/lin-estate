@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Phone, Menu, X, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoDark from "@/assets/logo-dark.png";
-import logoLight from "@/assets/logo-light.png";
 
 const navLinks = [
   { to: "/", label: "דף הבית" },
@@ -42,9 +41,11 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center group">
             <img
-              src={isTransparent ? logoLight : logoDark}
+              src={logoDark}
               alt="ליה נדל״ן"
-              className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
+              className={`h-10 md:h-12 w-auto object-contain transition-all duration-300 ${
+                isTransparent ? "brightness-0 invert" : ""
+              }`}
             />
           </Link>
 
