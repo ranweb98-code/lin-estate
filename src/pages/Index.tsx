@@ -6,6 +6,7 @@ import PropertyCard from "@/components/PropertyCard";
 import { useProperties } from "@/hooks/useProperties";
 import { ListingType } from "@/data/properties";
 import heroBg from "@/assets/hero-bg.jpg";
+import logoSymbol from "@/assets/logo-symbol.png";
 import FadeIn from "@/components/FadeIn";
 import ListingTypeFilter from "@/components/ListingTypeFilter";
 import PropertyOfTheWeek from "@/components/PropertyOfTheWeek";
