@@ -9,10 +9,8 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-14">
           <div>
-            <div className="flex items-center gap-2 mb-5">
-              <h3 className="text-2xl font-bold font-display text-white">ליה</h3>
-              <span className="w-1.5 h-1.5 rounded-full bg-gold mt-0.5" />
-              <span className="text-[10px] tracking-[0.3em] uppercase text-white/40 font-medium">נדל״ן</span>
+            <div className="mb-5">
+              <img src={logo} alt="ליה נדל״ן" className="h-14 w-auto object-contain brightness-0 invert" />
             </div>
             <p className="text-white/50 text-sm leading-[1.9] max-w-xs">
               סוכנת נדל״ן המתמחה באזור אשדוד והסביבה, עם שירות אישי וליווי מלא עד סגירת העסקה.
