@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone, Menu, X, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoSymbol from "@/assets/logo-symbol.png";
 
 const navLinks = [
   { to: "/", label: "דף הבית" },
