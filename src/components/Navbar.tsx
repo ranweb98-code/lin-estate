@@ -42,11 +42,9 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center group">
             <img
-              src={logo}
+              src={isTransparent ? logoLight : logoDark}
               alt="ליה נדל״ן"
-              className={`h-12 md:h-14 w-auto object-contain transition-all duration-300 ${
-                isTransparent ? "brightness-0 invert" : ""
-              }`}
+              className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
             />
           </Link>
 
