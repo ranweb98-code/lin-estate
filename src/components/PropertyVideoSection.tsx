@@ -91,10 +91,7 @@ function VideoCard({ property }: { property: Property }) {
 
 export default function PropertyVideoSection({ properties }: Props) {
   const videoProperties = useMemo(() => {
-    const withVideo = properties.filter((p) => p.videoUrl);
-    if (withVideo.length === 0) return [];
-    const shuffled = [...withVideo].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 3);
+    return properties.filter((p) => p.videoUrl);
   }, [properties]);
 
   if (videoProperties.length === 0) return null;
