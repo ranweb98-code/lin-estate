@@ -10,7 +10,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-14">
           <div>
             <div className="mb-5">
-              <img src={logoLight} alt="ליה נדל״ן" className="h-14 w-auto object-contain" />
+              <img src={logoLight} alt="ליה נדל״ן" className="h-14 w-auto object-contain brightness-0 invert" />
             </div>
             <p className="text-white/50 text-sm leading-[1.9] max-w-xs">
               סוכנת נדל״ן המתמחה באזור אשדוד והסביבה, עם שירות אישי וליווי מלא עד סגירת העסקה.
