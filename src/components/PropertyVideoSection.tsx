@@ -114,7 +114,7 @@ export default function PropertyVideoSection({ properties }: Props) {
           </div>
         </FadeIn>
 
-        <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory scrollbar-hide pb-4 md:pb-0 -mx-4 px-4 md:mx-0 md:px-0">
           {videoProperties.map((p, i) => (
             <FadeIn key={p.id} delay={i * 120} scale>
               <div className="min-w-[75vw] md:min-w-0 snap-center">
