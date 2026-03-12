@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Phone, Menu, X, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoDark from "@/assets/logo-dark.png";
-import logoLight from "@/assets/logo-light.png";
 
 const navLinks = [
   { to: "/", label: "דף הבית" },
@@ -40,12 +38,16 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
-            <img
-              src={isTransparent ? logoLight : logoDark}
-              alt="ליה נדל״ן"
-              className="h-10 md:h-12 w-auto object-contain transition-all duration-300"
-            />
+          <Link to="/" className="flex items-center gap-2 group">
+            <span className={`text-2xl font-bold font-display tracking-tight transition-colors duration-300 ${
+              isTransparent ? "text-white" : "text-foreground"
+            }`}>
+              ליה
+            </span>
+            <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1" />
+            <span className={`text-[10px] tracking-[0.3em] uppercase font-medium transition-colors duration-300 ${
+              isTransparent ? "text-white/50" : "text-muted-foreground"
+            }`}>נדל״ן</span>
           </Link>
 
           {/* Desktop Nav */}
