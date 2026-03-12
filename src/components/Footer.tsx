@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Instagram, MessageCircle, Mail } from "lucide-react";
+import logo from "@/assets/logo.jpeg";
 
 const Footer = () => {
   return (
