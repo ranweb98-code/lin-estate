@@ -6,7 +6,6 @@ import PropertyCard from "@/components/PropertyCard";
 import { useProperties } from "@/hooks/useProperties";
 import { ListingType } from "@/data/properties";
 import heroBg from "@/assets/hero-bg.jpg";
-import logoSymbol from "@/assets/logo-symbol.png";
 import FadeIn from "@/components/FadeIn";
 import ListingTypeFilter from "@/components/ListingTypeFilter";
 import PropertyOfTheWeek from "@/components/PropertyOfTheWeek";
@@ -47,14 +46,8 @@ const Index = () => {
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/70" />
 
-        {/* Brand symbol */}
-        <img
-          src={logoSymbol}
-          alt=""
-          className="absolute top-24 right-4 md:top-28 md:right-10 z-10 w-[70px] md:w-[100px] lg:w-[120px] h-auto object-contain opacity-0 hero-brand-symbol"
-          style={{ mixBlendMode: "screen", filter: "invert(1)" }}
-          aria-hidden="true"
-        />
+
+
 
         {/* Content */}
         <div className="relative z-10 container mx-auto px-4 flex flex-col items-center text-center hero-content pt-20 pb-24">
