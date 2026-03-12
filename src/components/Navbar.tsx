@@ -43,9 +43,8 @@ const Navbar = () => {
             <img
               src={logoSymbol}
               alt="ליה נדל״ן"
-              className={`h-8 md:h-9 w-auto object-contain transition-all duration-300 ${
-                isTransparent ? "invert brightness-200" : ""
-              }`}
+              className="h-8 md:h-9 w-auto object-contain transition-all duration-300"
+              style={isTransparent ? { filter: "brightness(0) invert(1)" } : {}}
             />
             <span className="w-1.5 h-1.5 rounded-full bg-gold mt-1" />
             <span className={`text-[10px] tracking-[0.3em] uppercase font-medium transition-colors duration-300 ${
