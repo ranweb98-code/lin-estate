@@ -114,6 +114,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ─── QUICK FILTERS ─── */}
+      <HomeQuickFilters />
+
       {/* ─── PROPERTY OF THE WEEK ─── */}
       {!isLoading && properties.length > 0 && (
         <PropertyOfTheWeek properties={properties} />
