@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
+import PropertyInquiryForm from "@/components/PropertyInquiryForm";
 
 const PropertyDetail = () => {
   const { id } = useParams();
@@ -141,6 +142,10 @@ const PropertyDetail = () => {
                   שלחו הודעה בוואטסאפ
                 </Button>
               </a>
+
+              <div className="mt-8">
+                <PropertyInquiryForm property={property} />
+              </div>
             </div>
           </FadeIn>
         </div>

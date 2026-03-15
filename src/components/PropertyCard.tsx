@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, BedDouble, Maximize, MessageCircle } from "lucide-react";
+import { MapPin, BedDouble, Maximize, MessageCircle, Crown } from "lucide-react";
 
 import { Property, formatPrice, generateWhatsAppLink } from "@/data/properties";
 import { Badge } from "@/components/ui/badge";
@@ -10,8 +10,12 @@ interface PropertyCardProps {
 }
 
 const PropertyCard = ({ property }: PropertyCardProps) => {
+  const isFeatured = property.featuredWeek || property.isHot;
+
   return (
-    <div className="group bg-card rounded-2xl overflow-hidden border border-border transition-all duration-500 hover:-translate-y-1.5 hover:shadow-xl hover:border-gold/20 shine">
+    <div className={`group bg-card rounded-2xl overflow-hidden border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl shine ${
+      isFeatured ? "border-gold/30 shadow-lg shadow-gold/5" : "border-border hover:border-gold/20 hover:shadow-xl"
+    }`}>
       <Link to={`/properties/${property.id}`} className="block relative overflow-hidden aspect-[4/3]">
         <img
           src={property.image}
@@ -22,15 +26,21 @@ const PropertyCard = ({ property }: PropertyCardProps) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
         <div className="absolute top-3 right-3 flex gap-1.5">
+          {isFeatured && (
+            <Badge className="bg-gold text-gold-foreground border-0 text-[10px] px-3 py-1 font-semibold tracking-wide gap-1">
+              <Crown className="h-3 w-3" />
+              מומלץ
+            </Badge>
+          )}
           {property.isNew && (
-            <Badge className="bg-gold text-gold-foreground border-0 text-[10px] px-3 py-1 font-semibold tracking-wide">חדש</Badge>
+            <Badge className="bg-foreground/80 backdrop-blur-sm text-background border-0 text-[10px] px-3 py-1 font-semibold tracking-wide">חדש</Badge>
           )}
           {property.isHot && (
             <Badge className="bg-destructive text-destructive-foreground border-0 text-[10px] px-3 py-1 font-semibold tracking-wide">חם!</Badge>
           )}
         </div>
         <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-          <span className="text-white font-bold text-xl font-display drop-shadow-lg">
+          <span className="text-gold font-bold text-2xl font-display drop-shadow-lg tracking-tight">
             {formatPrice(property.price)}
           </span>
         </div>
