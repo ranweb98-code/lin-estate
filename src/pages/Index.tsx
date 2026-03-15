@@ -10,6 +10,7 @@ import FadeIn from "@/components/FadeIn";
 import ListingTypeFilter from "@/components/ListingTypeFilter";
 import PropertyOfTheWeek from "@/components/PropertyOfTheWeek";
 import PropertyVideoSection from "@/components/PropertyVideoSection";
+import HomeQuickFilters from "@/components/HomeQuickFilters";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const AboutAgent = lazy(() => import("@/components/AboutAgent"));
