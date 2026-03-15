@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
 import FadeIn from "@/components/FadeIn";
+import PropertyInquiryForm from "@/components/PropertyInquiryForm";
 
 const PropertyDetail = () => {
   const { id } = useParams();
