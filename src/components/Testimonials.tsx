@@ -1,4 +1,5 @@
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
 import FadeIn from "@/components/FadeIn";
 
 const testimonials = [
@@ -15,6 +16,16 @@ const testimonials = [
   {
     name: "שירה ברק",
     text: "חיפשנו דירת השקעה וליה מצאה לנו בדיוק את מה שרצינו. שירות אישי ומקצועי מהרגע הראשון.",
+    rating: 5,
+  },
+  {
+    name: "דניאל מזרחי",
+    text: "ליה הפתיעה אותנו עם רמת השירות. מהרגע הראשון הרגשנו שאנחנו בידיים טובות. מקצועית ברמה הגבוהה ביותר!",
+    rating: 5,
+  },
+  {
+    name: "מיכל גולדשטיין",
+    text: "מצאנו את דירת החלומות שלנו בזכות ליה. היא הבינה בדיוק מה אנחנו מחפשים והתאימה לנו את הנכס המושלם.",
     rating: 5,
   },
 ];
