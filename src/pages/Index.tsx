@@ -213,7 +213,7 @@ const Index = () => {
       </section>
 
       {/* ─── FLOATING AI BUTTON ─── */}
-      <Link to="/ai-finder" className="fixed bottom-6 left-6 z-50" title="מציאת נכס בעזרת AI">
+      <Link to="/ai-finder" className="fixed bottom-6 left-20 z-50" title="מציאת נכס בעזרת AI">
         <div className="bg-gold text-gold-foreground rounded-full p-4 shadow-xl shadow-gold/25 transition-transform duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95">
           <Sparkles className="h-5 w-5" />
         </div>

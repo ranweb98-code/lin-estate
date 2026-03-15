@@ -56,6 +56,18 @@ function TestimonialCard({ t, index }: { t: typeof testimonials[0]; index: numbe
 }
 
 const Testimonials = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const total = testimonials.length;
+
+  const next = useCallback(() => setActiveIndex((i) => (i + 1) % total), [total]);
+  const prev = useCallback(() => setActiveIndex((i) => (i - 1 + total) % total), [total]);
+
+  // Auto-advance every 5s
+  useEffect(() => {
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
+
   return (
     <section className="py-28 md:py-36 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
@@ -75,11 +87,54 @@ const Testimonials = () => {
           </div>
         </FadeIn>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-7 max-w-5xl mx-auto">
-          {testimonials.map((t, i) => (
+        {/* Desktop grid */}
+        <div className="hidden md:grid grid-cols-3 gap-7 max-w-5xl mx-auto">
+          {testimonials.slice(0, 3).map((t, i) => (
             <TestimonialCard key={t.name} t={t} index={i} />
           ))}
+        </div>
+
+        {/* Mobile slider */}
+        <div className="md:hidden relative">
+          <div className="overflow-hidden">
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(${activeIndex * 100}%)` }}
+            >
+              {testimonials.map((t, i) => (
+                <div key={t.name} className="w-full flex-shrink-0 px-1">
+                  <TestimonialCard t={t} index={0} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              onClick={prev}
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-gold hover:border-gold/30 transition-colors"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveIndex(i)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === activeIndex ? "bg-gold w-6" : "bg-border"
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={next}
+              className="w-10 h-10 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-gold hover:border-gold/30 transition-colors"
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </div>
     </section>

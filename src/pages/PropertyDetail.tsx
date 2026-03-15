@@ -142,6 +142,10 @@ const PropertyDetail = () => {
                   שלחו הודעה בוואטסאפ
                 </Button>
               </a>
+
+              <div className="mt-8">
+                <PropertyInquiryForm property={property} />
+              </div>
             </div>
           </FadeIn>
         </div>
