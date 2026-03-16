@@ -26,7 +26,7 @@ function VideoCard({ property }: { property: Property }) {
 
   return (
     <Link to={`/properties/${property.id}`} className="group block">
-      <div className="relative aspect-[9/16] md:aspect-[3/4] rounded-2xl overflow-hidden bg-muted shadow-lg border border-border">
+      <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-muted shadow-lg border border-border">
         {property.videoUrl && isEmbed ? (
           <iframe
             src={getEmbedUrl(property.videoUrl, isMuted)}
