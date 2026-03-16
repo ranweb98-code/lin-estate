@@ -26,7 +26,7 @@ function VideoCard({ property }: { property: Property }) {
 
   return (
     <Link to={`/properties/${property.id}`} className="group block">
-      <div className="relative aspect-[9/16] md:aspect-[3/4] rounded-2xl overflow-hidden bg-muted shadow-lg border border-border">
+      <div className="relative aspect-[9/16] rounded-2xl overflow-hidden bg-muted shadow-lg border border-border">
         {property.videoUrl && isEmbed ? (
           <iframe
             src={getEmbedUrl(property.videoUrl, isMuted)}
@@ -185,7 +185,7 @@ export default function PropertyVideoSection({ properties }: Props) {
           >
             {videoProperties.map((p, i) => (
               <FadeIn key={p.id} delay={i * 120} scale>
-                <div className="min-w-[75vw] md:min-w-[30%] lg:min-w-[28%] snap-center flex-shrink-0">
+                <div className="min-w-[80vw] sm:min-w-[60vw] md:min-w-[340px] lg:min-w-[380px] snap-center flex-shrink-0">
                   <VideoCard property={p} />
                 </div>
               </FadeIn>
